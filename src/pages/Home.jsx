@@ -9,20 +9,28 @@ const Home = () => {
     return (
         <Box className={classes.section}>
             <InputBox />
+            <Box className={classes.background} />
         </Box>
     );
 };
 
 const useStyles = makeStyles(() => ({
     section: {
+        position: "relative",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+    },
+    background: {
+        position: "fixed",
+        inset: 0,
+        zIndex: -1,
         backgroundImage: `url(${Express})`,
-        height: "100vh",
+        filter: "blur(5px) brightness(0.9)",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
     },
 }));
 

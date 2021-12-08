@@ -10,7 +10,7 @@ const NavBar = () => {
     const classes = useStyles();
 
     return (
-        <Box className={classes.set}>
+        <Box className={classes.set} sx={{ boxShadow: 3 }}>
             <Box className={classes.logo}>
                 <img
                     src={Logo}
@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
         position: "fixed",
         backgroundColor: "white",
         top: "0",
+        zIndex: 100,
     },
     logo: {
         display: "flex",

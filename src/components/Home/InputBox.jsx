@@ -1,61 +1,60 @@
-import { Button, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import TextField from "@mui/material/TextField";
-import { styled } from "@mui/material/styles";
-import React from "react";
-
-const CustomTextField = styled(TextField)({
-    "& label.Mui-focused": {
-        color: "#fd6637",
-    },
-    "& .MuiInput-underline:after": {
-        borderBottomColor: "#fd6637",
-    },
-    "& .MuiOutlinedInput-root": {
-        borderRadius: 12,
-        "& fieldset": {
-            borderColor: "#fd6637",
-        },
-        "&:hover fieldset": {
-            borderColor: "#fd6637",
-        },
-        "&.Mui-focused fieldset": {
-            borderColor: "#fd6637",
-        },
-    },
-});
-
-const ColorButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText("#fd6637"),
-    backgroundColor: "#ff845e",
-    borderRadius: 12,
-    textTransform: "none",
-    "&:hover": {
-        backgroundColor: "#fd6637",
-    },
-}));
+import React, { useState } from "react";
+import DeliveryProgress from "./DeliveryProgress";
+import TimelineDot from "./TimelineDot";
+import TrackingNumber from "./TrackingNumber";
+import TrackingSearch from "./TrackingSearch";
 
 const InputBox = () => {
     const classes = useStyles();
+
+    const [deliveryStatus, setDeliveryStatus] = useState(null);
+
     return (
         <Box className={classes.inputBox} sx={{ boxShadow: 3 }}>
-            <Box className={classes.inputText}>
-                <Typography variant="h3" fontWeight={600}>
-                    Track your order
-                </Typography>
-                <Box className={classes.textField}>
-                    <CustomTextField sx={{ width: "400px" }} />
-                    <ColorButton
-                        sx={{
-                            width: "100px",
-                            height: "55px",
-                            margin: "0 10px",
-                        }}
-                    >
-                        <Typography>Track</Typography>
-                    </ColorButton>
-                </Box>
+            <Box>
+                <TrackingSearch setDelivery={setDeliveryStatus} />
+                {deliveryStatus && deliveryStatus.trackingNumber.length > 0 ? (
+                    <Box>
+                        <DeliveryProgress status={deliveryStatus.status} />
+                        <TrackingNumber
+                            trackingNumber={deliveryStatus.trackingNumber}
+                        />
+                        {deliveryStatus?.details
+                            .map((el, idx) => {
+                                if (idx === 0) {
+                                    return (
+                                        <TimelineDot
+                                            position={-1}
+                                            time={el.date}
+                                            detail={el.description}
+                                        />
+                                    );
+                                } else if (
+                                    idx ===
+                                    deliveryStatus.details.length - 1
+                                ) {
+                                    return (
+                                        <TimelineDot
+                                            position={1}
+                                            time={el.date}
+                                            detail={el.description}
+                                        />
+                                    );
+                                } else {
+                                    return (
+                                        <TimelineDot
+                                            position={0}
+                                            time={el.date}
+                                            detail={el.description}
+                                        />
+                                    );
+                                }
+                            })
+                            .reverse()}
+                    </Box>
+                ) : null}
             </Box>
         </Box>
     );
@@ -65,21 +64,14 @@ const useStyles = makeStyles(() => ({
     inputBox: {
         backgroundColor: "white",
         width: "800px",
-        height: "350px",
+        height: "auto",
         borderRadius: "15px",
-        padding: "30px",
+        padding: "60px 20px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-    },
-    inputText: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-    },
-    textField: {
-        margin: "30px 0",
+        marginTop: "calc((100vh - 292px) /2)",
+        marginBottom: "80px",
     },
 }));
 
