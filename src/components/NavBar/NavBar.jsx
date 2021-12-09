@@ -11,17 +11,19 @@ const NavBar = () => {
 
     return (
         <Box className={classes.set} sx={{ boxShadow: 3 }}>
-            <Box className={classes.logo}>
-                <img
-                    src={Logo}
-                    alt="Logo"
-                    width="50px"
-                    style={{ margin: "0 10px" }}
-                />
-                <Typography variant="h5" sx={{ fontWeight: 600 }}>
-                    CShop Delivery
-                </Typography>
-            </Box>
+            <a href="/" className={classes.a}>
+                <Box className={classes.logo}>
+                    <img
+                        src={Logo}
+                        alt="Logo"
+                        width="50px"
+                        style={{ margin: "0 10px" }}
+                    />
+                    <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                        CShop Delivery
+                    </Typography>
+                </Box>
+            </a>
             <Box className={classes.menu}>
                 {menusSelect.map((menu) => {
                     return (
@@ -51,12 +53,18 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
         alignItems: "center",
         marginLeft: "30px",
+        cursor: "pointer",
     },
     menu: {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         marginRight: "40px",
+    },
+    a: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
     },
 }));
 

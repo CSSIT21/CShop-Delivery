@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import { ThemeContextProvider } from "./contexts/ThemeContext";
 import NavBar from "./components/NavBar/NavBar";
+import Login from "./pages/Login";
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/admin" element={<Login />} />
                     </Routes>
                 </BrowserRouter>
             </ThemeContextProvider>
