@@ -12,7 +12,7 @@ const TrackingSearch = ({ setDelivery }) => {
     const search = () => {
         setDelivery({
             trackingNumber: trackingNumber,
-            status: "Received a package",
+            status: "Delivering",
             details: [
                 {
                     date: "2021-11-07",
@@ -46,7 +46,7 @@ const TrackingSearch = ({ setDelivery }) => {
 
     return (
         <Box className={classes.inputText}>
-            <Typography variant="h3" fontWeight={600}>
+            <Typography variant="h3" fontWeight={600} sx={{ margin: "20px 0" }}>
                 Track your order
             </Typography>
             <Box className={classes.textField}>
@@ -58,6 +58,11 @@ const TrackingSearch = ({ setDelivery }) => {
                     onKeyPress={(e) => {
                         keyCheck(e);
                     }}
+                    value={
+                        trackingNumber.length === 21
+                            ? trackingNumber.substring(0, 20)
+                            : trackingNumber
+                    }
                 />
                 <ColorButton
                     sx={{

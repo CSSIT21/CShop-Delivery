@@ -21,38 +21,47 @@ const InputBox = () => {
                         <TrackingNumber
                             trackingNumber={deliveryStatus.trackingNumber}
                         />
-                        {deliveryStatus?.details
-                            .map((el, idx) => {
-                                if (idx === 0) {
-                                    return (
-                                        <TimelineDot
-                                            position={-1}
-                                            time={el.date}
-                                            detail={el.description}
-                                        />
-                                    );
-                                } else if (
-                                    idx ===
-                                    deliveryStatus.details.length - 1
-                                ) {
-                                    return (
-                                        <TimelineDot
-                                            position={1}
-                                            time={el.date}
-                                            detail={el.description}
-                                        />
-                                    );
-                                } else {
-                                    return (
-                                        <TimelineDot
-                                            position={0}
-                                            time={el.date}
-                                            detail={el.description}
-                                        />
-                                    );
-                                }
-                            })
-                            .reverse()}
+                        {deliveryStatus?.details.length > 1 ? (
+                            deliveryStatus?.details
+                                .map((el, idx) => {
+                                    if (idx === 0) {
+                                        return (
+                                            <TimelineDot
+                                                position={-1}
+                                                time={el.date}
+                                                detail={el.description}
+                                            />
+                                        );
+                                    } else if (
+                                        idx ===
+                                        deliveryStatus.details.length - 1
+                                    ) {
+                                        return (
+                                            <TimelineDot
+                                                position={1}
+                                                time={el.date}
+                                                detail={el.description}
+                                            />
+                                        );
+                                    } else {
+                                        return (
+                                            <TimelineDot
+                                                position={0}
+                                                time={el.date}
+                                                detail={el.description}
+                                            />
+                                        );
+                                    }
+                                })
+                                .reverse()
+                        ) : (
+                            <TimelineDot
+                                position={1}
+                                time={deliveryStatus?.details[0].date}
+                                detail={deliveryStatus?.details[0].description}
+                                size={1}
+                            />
+                        )}
                     </Box>
                 ) : null}
             </Box>

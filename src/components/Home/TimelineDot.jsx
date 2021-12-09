@@ -8,9 +8,10 @@ import { makeStyles } from "@mui/styles";
   - 3: Last element
  */
 
-const TimelineDot = ({ position, time, detail }) => {
+const TimelineDot = ({ position, time, detail, size = 0 }) => {
     const classes = useStyles({
         isLast: position === 1,
+        size: size,
     });
 
     return (
@@ -41,7 +42,8 @@ const useStyles = makeStyles((theme) => ({
         left: 16,
         width: 1,
         height: 24,
-        backgroundColor: "rgb(122, 122, 122)",
+        backgroundColor: ({ length }) =>
+            length === 1 ? "#fd6637" : "rgb(122, 122, 122)",
     },
     lineLower: {
         position: "absolute",
