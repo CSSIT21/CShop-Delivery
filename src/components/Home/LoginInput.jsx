@@ -10,22 +10,12 @@ const LoginInput = () => {
     return (
         <Box className={classes.inputBox} sx={{ boxShadow: 3 }}>
             <Box className={classes.inputSubBox}>
-                <Typography
-                    variant="h3"
-                    fontWeight={600}
-                    sx={{ margin: "20px 0" }}
-                >
+                <Typography variant="h3" fontWeight={600} sx={{ margin: "20px 0" }}>
                     Login
                 </Typography>
                 <Box className={classes.textFieldBox}>
-                    <CustomTextField
-                        sx={{ margin: "10px 0" }}
-                        placeholder="username"
-                    />
-                    <CustomTextField
-                        sx={{ margin: "10px 0" }}
-                        placeholder="password"
-                    />
+                    <CustomTextField sx={{ margin: "10px 0" }} placeholder="username" />
+                    <CustomTextField sx={{ margin: "10px 0" }} placeholder="password" />
                     <ColorButton
                         size="large"
                         fullWidth

@@ -1,21 +1,33 @@
 import "./styles/reset/reset.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import { ThemeContextProvider } from "./contexts/ThemeContext";
 import NavBar from "./components/NavBar/NavBar";
 import Login from "./pages/Login";
+import Request from "./pages/Admin/Request";
 
 function App() {
     return (
         <div className="App">
             <ThemeContextProvider>
-                <NavBar />
-                <BrowserRouter>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/admin" element={<Login />} />
-                    </Routes>
-                </BrowserRouter>
+                <Router>
+                    <Switch>
+                        <Route path="/" exact>
+                            <NavBar />
+                            <Route exact path="/">
+                                <Home />
+                            </Route>
+                            <Route exact path="/login">
+                                <Login />
+                            </Route>
+                        </Route>
+                        <Route path="/admin" exact>
+                            <Route exact path="/admin">
+                                <Request />
+                            </Route>
+                        </Route>
+                    </Switch>
+                </Router>
             </ThemeContextProvider>
         </div>
     );
