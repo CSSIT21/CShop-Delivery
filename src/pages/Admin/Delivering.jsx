@@ -1,11 +1,12 @@
 import { Box } from "@mui/system";
 import React from "react";
+import TableStatus from "../../components/Admin/Table";
 import Sidebar from "../../components/Layouts/SideBar";
 
 const Delivering = () => {
     return (
         <Sidebar>
-            <Box>This is the d</Box>
+            <TableStatus />
         </Sidebar>
     );
 };

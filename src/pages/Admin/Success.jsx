@@ -1,11 +1,12 @@
 import { Box } from "@mui/system";
 import React from "react";
+import TableStatus from "../../components/Admin/Table";
 import Sidebar from "../../components/Layouts/SideBar";
 
 const Success = () => {
     return (
         <Sidebar>
-            <Box>This is the first page</Box>
+            <TableStatus />
         </Sidebar>
     );
 };

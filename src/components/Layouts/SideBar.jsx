@@ -76,6 +76,19 @@ export default function Sidebar(props) {
     //destructuring pathname from location
     const { pathname } = location;
 
+    const pathDetail = () => {
+        switch (pathname) {
+            case "/admin/requests":
+                return "All requests";
+            case "/admin/packages":
+                return "Received All Packages";
+            case "/admin/delivering":
+                return "Delivering";
+            default:
+                return "Success";
+        }
+    };
+
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -121,15 +134,11 @@ export default function Sidebar(props) {
                     ))}
                 </List>
             </Drawer>
-            <Box
-                component="main"
-                sx={{
-                    minHeight: "100vh",
-                    flexGrow: 1,
-                    backgroundColor: "rgba(239, 239, 241, 0.7)",
-                }}
-            >
-                {props.children}
+            <Box component="main" className={classes.childrenBox}>
+                <Box>
+                    <Typography variant="h4">{pathDetail()}</Typography>
+                </Box>
+                <Box marginTop={3}>{props.children}</Box>
             </Box>
         </Box>
     );
@@ -146,6 +155,12 @@ const useStyles = makeStyles({
         height: 40,
         fontSize: 25,
         color: "#A0A3BD",
+    },
+    childrenBox: {
+        minHeight: "100vh",
+        flexGrow: 1,
+        backgroundColor: "rgba(239, 239, 241, 0.7)",
+        padding: "27px 27px",
     },
 });
 
