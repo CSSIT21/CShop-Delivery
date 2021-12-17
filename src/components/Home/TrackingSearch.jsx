@@ -59,8 +59,8 @@ const TrackingSearch = ({ setDelivery }) => {
                         keyCheck(e);
                     }}
                     value={
-                        trackingNumber.length === 21
-                            ? trackingNumber.substring(0, 20)
+                        trackingNumber.length === 11
+                            ? trackingNumber.substring(0, 10)
                             : trackingNumber
                     }
                 />

@@ -5,11 +5,14 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useLocation } from "react-router-dom";
+import ConfirmProgressUpdateDialog from "./ConfirmProgressUpdateDialog";
 
 export default function SelectButton() {
     const [age, setAge] = React.useState("");
+    const confirmDialog = React.useRef(null);
 
     const handleChange = (event) => {
+        confirmDialog.current.open(age);
         setAge(event.target.value);
     };
 
@@ -37,6 +40,7 @@ export default function SelectButton() {
                     value={age}
                     label="Age"
                     onChange={handleChange}
+                    fullWidth
                 >
                     {checkPath() < 2 ? (
                         <MenuItem value={2}>Received a package</MenuItem>
@@ -49,6 +53,7 @@ export default function SelectButton() {
                     ) : null}
                 </Select>
             </FormControl>
+            <ConfirmProgressUpdateDialog ref={confirmDialog} />
         </Box>
     );
 }

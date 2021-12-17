@@ -16,16 +16,7 @@ function App() {
             <ThemeContextProvider>
                 <Router>
                     <Switch>
-                        <Route path="/" exact>
-                            <NavBar />
-                            <Route exact path="/">
-                                <Home />
-                            </Route>
-                            <Route exact path="/login">
-                                <Login />
-                            </Route>
-                        </Route>
-                        <Redirect exact path="/admin" to="/admin/requests" />
+                        <Redirect path="/admin" to="/admin/requests" exact />
                         <Route path="/admin/requests" exact>
                             <Requests />
                         </Route>
@@ -37,6 +28,15 @@ function App() {
                         </Route>
                         <Route path="/admin/success" exact>
                             <Success />
+                        </Route>
+                        <Route path="/">
+                            <NavBar />
+                            <Route exact path="/">
+                                <Home />
+                            </Route>
+                            <Route exact path="/login">
+                                <Login />
+                            </Route>
                         </Route>
                     </Switch>
                 </Router>

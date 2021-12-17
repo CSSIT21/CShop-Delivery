@@ -16,6 +16,9 @@ import Inventory2Icon from "@mui/icons-material/Inventory2";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Link, useLocation } from "react-router-dom";
+import ColorButton from "../../styles/CustomMui/ColorButton";
+import Cookies from "js-cookie";
+import { useHistory } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -76,6 +79,13 @@ export default function Sidebar(props) {
     //destructuring pathname from location
     const { pathname } = location;
 
+    const history = useHistory();
+
+    const logout = () => {
+        Cookies.remove("cshop-delivery-admin");
+        history.push("/");
+    };
+
     const pathDetail = () => {
         switch (pathname) {
             case "/admin/requests":
@@ -135,8 +145,23 @@ export default function Sidebar(props) {
                 </List>
             </Drawer>
             <Box component="main" className={classes.childrenBox}>
-                <Box>
+                <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
                     <Typography variant="h4">{pathDetail()}</Typography>
+                    <ColorButton
+                        size="large"
+                        fullWidth
+                        sx={{
+                            height: "50px",
+                            width: "120px",
+                        }}
+                        onClick={logout}
+                    >
+                        Logout
+                    </ColorButton>
                 </Box>
                 <Box marginTop={3}>{props.children}</Box>
             </Box>

@@ -9,6 +9,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import SelectButton from "./SelectButton";
 import { useLocation } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { Box } from "@mui/system";
+import UpdateDialog from "./UpdateDialog";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -45,64 +49,82 @@ const rows = [
 export default function TableStatus() {
     const location = useLocation();
     const { pathname } = location;
+    const editDialogRef = React.useRef(null);
 
     return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell>Tracking number</StyledTableCell>
-                        <StyledTableCell align="center">
-                            Latest updated
-                        </StyledTableCell>
-                        <StyledTableCell align="center">
-                            Created time
-                        </StyledTableCell>
-                        {pathname === "/admin/success" ? (
+        <>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>Tracking number</StyledTableCell>
                             <StyledTableCell align="center">
-                                Success time
-                            </StyledTableCell>
-                        ) : (
-                            <StyledTableCell align="center">
-                                Update status
-                            </StyledTableCell>
-                        )}
-                        <StyledTableCell align="center">
-                            Customer
-                        </StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <StyledTableRow key={row.name}>
-                            <StyledTableCell component="th" scope="row">
-                                {row.name}
+                                Latest updated
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {row.calories}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {row.fat}
+                                Created time
                             </StyledTableCell>
                             {pathname === "/admin/success" ? (
                                 <StyledTableCell align="center">
-                                    12-12-2021 10:56
+                                    Success time
                                 </StyledTableCell>
                             ) : (
-                                <StyledTableCell
-                                    align="center"
-                                    sx={{ width: 300 }}
-                                >
-                                    <SelectButton />
+                                <StyledTableCell align="center">
+                                    Update status
                                 </StyledTableCell>
                             )}
                             <StyledTableCell align="center">
-                                CShop
+                                Customer
                             </StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((row) => (
+                            <StyledTableRow key={row.name}>
+                                <StyledTableCell component="th" scope="row">
+                                    {row.name}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {row.calories}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {row.fat}
+                                </StyledTableCell>
+                                {pathname === "/admin/success" ? (
+                                    <StyledTableCell align="center">
+                                        12-12-2021 10:56
+                                    </StyledTableCell>
+                                ) : (
+                                    <StyledTableCell
+                                        align="center"
+                                        sx={{ width: 320 }}
+                                    >
+                                        <Box
+                                            display="flex"
+                                            width="100%"
+                                            justifyContent="center"
+                                        >
+                                            <SelectButton />
+                                            <IconButton
+                                                sx={{ margin: "0 10px" }}
+                                                onClick={() => {
+                                                    editDialogRef.current.open();
+                                                }}
+                                            >
+                                                <BorderColorIcon />
+                                            </IconButton>
+                                        </Box>
+                                    </StyledTableCell>
+                                )}
+                                <StyledTableCell align="center">
+                                    CShop
+                                </StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <UpdateDialog ref={editDialogRef} />
+        </>
     );
 }

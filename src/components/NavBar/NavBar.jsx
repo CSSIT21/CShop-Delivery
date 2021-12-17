@@ -3,11 +3,23 @@ import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import Logo from "../../public/Outline.png";
 import React from "react";
+import { useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
+import ColorButton from "../../styles/CustomMui/ColorButton";
 
 const menusSelect = ["Admin", "Contact"];
 
 const NavBar = () => {
     const classes = useStyles();
+    const history = useHistory();
+
+    const checkCookie = () => {
+        if (Cookies.get("cshop-delivery-admin")) {
+            history.push("/admin");
+        } else {
+            history.push("/login");
+        }
+    };
 
     return (
         <Box className={classes.set} sx={{ boxShadow: 3 }}>
@@ -27,9 +39,9 @@ const NavBar = () => {
             <Box className={classes.menu}>
                 {menusSelect.map((menu) => {
                     return (
-                        <a href={`${menu.toLowerCase()}`}>
+                        <Box onClick={checkCookie} className={classes.a}>
                             <Typography margin="0 20px">{menu}</Typography>
-                        </a>
+                        </Box>
                     );
                 })}
             </Box>
@@ -65,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        cursor: "pointer",
     },
 }));
 
