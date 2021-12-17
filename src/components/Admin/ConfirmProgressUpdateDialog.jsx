@@ -11,7 +11,7 @@ import { Typography } from "@mui/material";
 
 const ConfirmProgressUpdateDialog = React.forwardRef((props, ref) => {
     const [open, setOpen] = React.useState(false);
-    const [correct, setCorrect] = React.useState(false);
+    const [correct] = React.useState(false);
 
     const handleClickOpen = () => {
         console.log("work");

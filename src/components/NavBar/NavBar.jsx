@@ -5,7 +5,6 @@ import Logo from "../../public/Outline.png";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
-import ColorButton from "../../styles/CustomMui/ColorButton";
 
 const menusSelect = ["Admin", "Contact"];
 
